@@ -21,8 +21,6 @@ useEffect(() => {
 
   return () => clearInterval(interval);
 }, []);
-    loadAnalytics();
-  }, []);
 
   return (
     <main className="min-h-screen bg-gray-100">
