@@ -27,9 +27,15 @@ export default function LeadsPage() {
     setLeads(data.leads || []);
   }
 
-  useEffect(() => {
+useEffect(() => {
+  loadLeads();
+
+  const interval = setInterval(() => {
     loadLeads();
-  }, [status, score]);
+  }, 10000);
+
+  return () => clearInterval(interval);
+}, [status, score]);
 
   async function deleteLead(id) {
     const confirmDelete = confirm("Are you sure you want to delete this lead?");

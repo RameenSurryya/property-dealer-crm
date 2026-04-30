@@ -6,13 +6,21 @@ import DashboardNav from "@/components/dashboard/DashboardNav";
 export default function AdminDashboard() {
   const [analytics, setAnalytics] = useState(null);
 
-  useEffect(() => {
-    async function loadAnalytics() {
-      const res = await fetch("/api/analytics");
-      const data = await res.json();
-      setAnalytics(data);
-    }
+useEffect(() => {
+  async function loadAnalytics() {
+    const res = await fetch("/api/analytics");
+    const data = await res.json();
+    setAnalytics(data);
+  }
 
+  loadAnalytics();
+
+  const interval = setInterval(() => {
+    loadAnalytics();
+  }, 10000);
+
+  return () => clearInterval(interval);
+}, []);
     loadAnalytics();
   }, []);
 
